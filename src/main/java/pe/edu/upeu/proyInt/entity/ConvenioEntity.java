@@ -36,6 +36,8 @@ public class ConvenioEntity implements Serializable {
     @Column(name = "TIPO")
     private String tipo;
 
-    /*@Column(name = "UBICACION_ID_UBICACION")
-    private String ubicacion_id_ubicacion;*/
+    @ManyToOne
+    @JoinColumn(name = "UBICACION_ID_UBICACION")
+    private UbicacionEntity ubicacion;
+
 }

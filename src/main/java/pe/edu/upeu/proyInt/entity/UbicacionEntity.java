@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,4 +30,5 @@ public class UbicacionEntity implements Serializable {
 
     @Column(name = "DEPARTAMENTO")
     private String departamento;
+
 }

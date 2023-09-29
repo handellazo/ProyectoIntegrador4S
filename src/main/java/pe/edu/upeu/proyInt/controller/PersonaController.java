@@ -18,8 +18,13 @@ public class PersonaController {
     //Listar Personas
     @GetMapping("/listPersona") //GET @GetMapping es una anotacion para construir APIS
     public ResponseEntity<List<PersonaEntity>> listaPersonas(){
-        List<PersonaEntity> personas = personaService.personaListar();
-        return new ResponseEntity<>(personas, HttpStatus.OK);
+        try{
+            List<PersonaEntity> personas = personaService.personaListar();
+            return new ResponseEntity<>(personas, HttpStatus.OK);
+        } catch (Error e){
+            System.out.println("Error pe mongol: " + e);
+        }
+        return null;
     };
 
     //Añadir Persona

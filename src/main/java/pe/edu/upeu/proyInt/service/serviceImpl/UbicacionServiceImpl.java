@@ -29,6 +29,21 @@ public class UbicacionServiceImpl implements UbicacionService {
     }
 
     @Override
+    public UbicacionEntity buscarUbicacionPorDep(String departamento) {
+        return null;
+    }
+
+    @Override
+    public UbicacionEntity buscarUbicacionPorProv(String provincia) {
+        return null;
+    }
+
+    @Override
+    public List<UbicacionEntity> depListar() {
+        return null;
+    }
+
+    @Override
     public UbicacionEntity guardarUbicacion(UbicacionEntity ubicacionEntity) {
         UbicacionEntity nuevoUbicacion = new UbicacionEntity();
         nuevoUbicacion.setDistrito(ubicacionEntity.getDistrito());

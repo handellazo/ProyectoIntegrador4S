@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,7 +23,10 @@ public class RolEntity implements Serializable {
     @SequenceGenerator(sequenceName = "SEQ_ROL", allocationSize = 1, name = "seqRol")
     private Integer id;
 
-    @Column(name = "ROL")
+    @Column(name="ROL")
     private String rol;
+
+    @OneToMany(mappedBy = "rol", fetch = FetchType.EAGER)
+    private Set<PersonaEntity> personaEntity;
 
 }
