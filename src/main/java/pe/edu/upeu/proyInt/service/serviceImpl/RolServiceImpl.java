@@ -32,6 +32,7 @@ public class RolServiceImpl implements RolService {
     public RolEntity guardarRol(RolEntity rolEntity) {
         RolEntity nuevoRol = new RolEntity();
         nuevoRol.setRol(rolEntity.getRol());
+        nuevoRol.setDescripcion(rolEntity.getDescripcion());
         return rolInterface.save(nuevoRol);
     }
 
@@ -40,6 +41,7 @@ public class RolServiceImpl implements RolService {
         RolEntity rolEncontrado = rolInterface.findById(id).orElse(null);
         if (rolEncontrado != null){
             rolEncontrado.setRol(rolEntity.getRol());
+            rolEncontrado.setDescripcion(rolEntity.getDescripcion());
             return rolInterface.save(rolEncontrado);
         }
         return null;

@@ -30,33 +30,43 @@ public class ProyectoEntity implements Serializable {
     @Column(name = "FECHA_FIN")
     private Date fin;
 
-    @Column(name = "TIPO")
-    private String tipo;
-
     @Column(name = "ANEXO")
     private String anexo;
+
+    @Column(name = "ESTADO")
+    private String estado;
 
     @Column(name = "CANT_BENEFICIARIOS")
     private Integer beneficiarios;
 
-    @Column(name = "FACULTAD")
-    private String facultad;
-
-    @Column(name = "ESCUELA_PROFESIONAL")
-    private String ep;
-
     @Column(name = "PRESUPUESTO")
     private Integer presupuesto;
+
+    @Column(name = "URL_DOC")
+    private String url_doc;
+
+    @Column(name = "REPRESENTANTE")
+    private String representante;
 
     @ManyToOne
     @JoinColumn(name = "CONVENIO_ID_CONVENIO")
     private ConvenioEntity convenio;
 
     @ManyToOne
-    @JoinColumn(name = "CURSO_ID_CURSO")
-    private CursoEntity curso;
-
-    @ManyToOne
     @JoinColumn(name = "UBICACION_ID_UBICACION")
     private UbicacionEntity ubicacion;
+
+    @ManyToOne
+    @JoinColumn(name = "EP_ID_EP")
+    private EpEntity ep;
+
+    @ManyToOne
+    @JoinColumn(name = "TIPOPY_ID_TIPOPY")
+    private TipoPYEntity tipoPY;
+
+    @ManyToOne
+    @JoinColumn(name = "SEMESTRE_ID_SEMESTRE")
+    private SemestreEntity semestre;
+
+
 }

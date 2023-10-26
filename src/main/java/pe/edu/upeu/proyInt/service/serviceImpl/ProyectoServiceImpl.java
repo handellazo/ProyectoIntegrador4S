@@ -3,14 +3,8 @@ package pe.edu.upeu.proyInt.service.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upeu.proyInt.dto.ProyectoDto;
-import pe.edu.upeu.proyInt.entity.ConvenioEntity;
-import pe.edu.upeu.proyInt.entity.CursoEntity;
-import pe.edu.upeu.proyInt.entity.ProyectoEntity;
-import pe.edu.upeu.proyInt.entity.UbicacionEntity;
-import pe.edu.upeu.proyInt.repository.ConvenioInterface;
-import pe.edu.upeu.proyInt.repository.CursoInterface;
-import pe.edu.upeu.proyInt.repository.ProyectoInterface;
-import pe.edu.upeu.proyInt.repository.UbicacionInterface;
+import pe.edu.upeu.proyInt.entity.*;
+import pe.edu.upeu.proyInt.repository.*;
 import pe.edu.upeu.proyInt.service.ProyectoService;
 import pe.edu.upeu.proyInt.service.exception.EntityNotFoundException;
 
@@ -26,7 +20,9 @@ public class ProyectoServiceImpl implements ProyectoService {
     @Autowired
     private UbicacionInterface ubicacionInterface;
     @Autowired
-    private CursoInterface cursoInterface;
+    private TipoPYInterface tipoPyInterface;
+    @Autowired
+    private EpInterface epInterface;
 
     @Override
     public List<ProyectoEntity> proyectoListar() {
@@ -43,23 +39,27 @@ public class ProyectoServiceImpl implements ProyectoService {
 
     @Override
     public ProyectoEntity guardarProyecto(ProyectoDto proyectoDto) {
-        ConvenioEntity convenioEncontrado = convenioInterface.findById(proyectoDto.getConvenio()).orElse(null);
-        UbicacionEntity ubicacionEncontrado = ubicacionInterface.findById(proyectoDto.getUbicacion()).orElse(null);
-        CursoEntity cursoEncontrado = cursoInterface.findById(proyectoDto.getCurso()).orElse(null);
+        ConvenioEntity convenioEncontrado = convenioInterface.findById(Integer.valueOf(proyectoDto.getConvenio())).orElse(null);
+        UbicacionEntity ubicacionEncontrado = ubicacionInterface.findById(Integer.valueOf(proyectoDto.getUbicacion())).orElse(null);
+        EpEntity epEncontrado = epInterface.findById(Integer.valueOf(proyectoDto.getEp())).orElse(null);
+        TipoPYEntity tipoPyEncontrado = tipoPyInterface.findById(Integer.valueOf(proyectoDto.getTipoPY())).orElse(null);
 
         ProyectoEntity nuevoProyecto = new ProyectoEntity();
         nuevoProyecto.setNombre(proyectoDto.getNombre());
         nuevoProyecto.setInicio(proyectoDto.getInicio());
         nuevoProyecto.setFin(proyectoDto.getFin());
-        nuevoProyecto.setTipo(proyectoDto.getTipo());
         nuevoProyecto.setAnexo(proyectoDto.getAnexo());
+        nuevoProyecto.setEstado(proyectoDto.getEstado());
         nuevoProyecto.setBeneficiarios(proyectoDto.getBeneficiarios());
-        nuevoProyecto.setFacultad(proyectoDto.getFacultad());
-        nuevoProyecto.setEp(proyectoDto.getEp());
         nuevoProyecto.setPresupuesto(proyectoDto.getPresupuesto());
+        nuevoProyecto.setUrl_doc(proyectoDto.getUrl_doc());
+        nuevoProyecto.setRepresentante(proyectoDto.getRepresentante());
+
         nuevoProyecto.setConvenio(convenioEncontrado);
-        nuevoProyecto.setCurso(cursoEncontrado);
         nuevoProyecto.setUbicacion(ubicacionEncontrado);
+        nuevoProyecto.setEp(epEncontrado);
+        nuevoProyecto.setTipoPY(tipoPyEncontrado);
+
         return proyectoInterface.save(nuevoProyecto);
 
     }
@@ -69,10 +69,19 @@ public class ProyectoServiceImpl implements ProyectoService {
         ProyectoEntity proyectoEncontrado = proyectoInterface.findById(id).orElse(null);
         if (proyectoEncontrado != null) {
             proyectoEncontrado.setNombre(proyectoEntity.getNombre());
-            proyectoEncontrado.setNombre(proyectoEntity.getNombre());
             proyectoEncontrado.setInicio(proyectoEntity.getInicio());
             proyectoEncontrado.setFin(proyectoEntity.getFin());
             proyectoEncontrado.setAnexo(proyectoEntity.getAnexo());
+            proyectoEncontrado.setEstado(proyectoEntity.getEstado());
+            proyectoEncontrado.setBeneficiarios(proyectoEntity.getBeneficiarios());
+            proyectoEncontrado.setPresupuesto(proyectoEntity.getPresupuesto());
+            proyectoEncontrado.setRepresentante(proyectoEntity.getRepresentante());
+            proyectoEncontrado.setUrl_doc(proyectoEntity.getUrl_doc());
+            proyectoEncontrado.setConvenio(proyectoEntity.getConvenio());
+            proyectoEncontrado.setUbicacion(proyectoEntity.getUbicacion());
+            proyectoEncontrado.setEp(proyectoEntity.getEp());
+            proyectoEncontrado.setTipoPY(proyectoEntity.getTipoPY());
+            proyectoEncontrado.setSemestre(proyectoEntity.getSemestre());
             return proyectoInterface.save(proyectoEncontrado);
         }
         return null;

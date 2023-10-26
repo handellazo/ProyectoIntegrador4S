@@ -17,21 +17,25 @@ public class ProyectoDto {
 
     private Date fin;
 
-    private String tipo;
-
     private String anexo;
+
+    private String estado;
 
     private Integer beneficiarios;
 
-    private String facultad;
+    private Integer presupuesto;
+
+    private String url_doc;
+
+    private String representante;
+
+    private String convenio;
+
+    private String ubicacion;
 
     private String ep;
 
-    private Integer presupuesto;
+    private String tipoPY;
 
-    private Integer convenio;
-
-    private Integer curso;
-
-    private Integer ubicacion;
+    private String semestre;
 }

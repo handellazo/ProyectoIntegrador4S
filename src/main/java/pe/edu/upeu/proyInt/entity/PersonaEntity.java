@@ -44,8 +44,4 @@ public class PersonaEntity implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ROL_ID_ROL")
     private RolEntity rol;
-
-    @ManyToOne
-    @JoinColumn(name = "PERSONA_ID_PERSONA")
-    private PersonaEntity persona;
 }
