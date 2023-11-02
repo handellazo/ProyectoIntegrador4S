@@ -12,6 +12,7 @@ import pe.edu.upeu.proyInt.service.ProyectoService;
 import java.util.List;
     @RestController
     @RequestMapping("/api/PROYECTO")
+    @CrossOrigin({"*"})
     public class ProyectoController {
         @Autowired
         private ProyectoService proyectoService;

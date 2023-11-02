@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/CONVENIO")
+@CrossOrigin({"*"})
 public class ConvenioController {
     @Autowired
     private ConvenioService convenioService;

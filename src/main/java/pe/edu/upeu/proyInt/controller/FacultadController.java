@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/FACULTAD")
+@CrossOrigin({"*"})
 public class FacultadController {
     @Autowired
     private FacultadService facultadService;

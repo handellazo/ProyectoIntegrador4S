@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/UBICACION")
+@CrossOrigin({"*"})
 public class UbicacionController {
     @Autowired
     private UbicacionService ubicacionService;
@@ -45,5 +46,15 @@ public class UbicacionController {
     public ResponseEntity<Void> deleteUbicacion(@PathVariable Integer id) {
         ubicacionService.eliminarUbicacion(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/departamento/{departamento}")
+    public List<UbicacionEntity> listByDepartamento(@PathVariable String departamento) {
+        return ubicacionService.findByDepartamento(departamento);
+    }
+
+    @GetMapping("/provincia/{provincia}")
+    public List<UbicacionEntity> listByProvincia(@PathVariable String provincia) {
+        return ubicacionService.findByProvincia(provincia);
     }
 }

@@ -9,8 +9,6 @@ import java.util.List;
 
 @Repository
 public interface UbicacionInterface extends JpaRepository<UbicacionEntity, Integer>{
-    /*@Query("")
-    UbicacionEntity findByDepartamento(String departamento);
-    UbicacionEntity findByProvincia(String provincia);
-    List<UbicacionEntity> listDepartamento();*/
+    List<UbicacionEntity> findByDepartamento(String departamento);
+    List<UbicacionEntity> findByProvincia(String provincia);
 }

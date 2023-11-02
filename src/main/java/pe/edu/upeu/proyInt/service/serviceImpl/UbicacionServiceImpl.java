@@ -29,14 +29,15 @@ public class UbicacionServiceImpl implements UbicacionService {
     }
 
     @Override
-    public UbicacionEntity buscarUbicacionPorDep(String departamento) {
-        return null;
+    public List<UbicacionEntity> findByDepartamento(String departamento) {
+        return ubicacionInterface.findByDepartamento(departamento);
     }
 
     @Override
-    public UbicacionEntity buscarUbicacionPorProv(String provincia) {
-        return null;
+    public List<UbicacionEntity> findByProvincia(String provincia) {
+        return ubicacionInterface.findByProvincia(provincia);
     }
+
 
     @Override
     public List<UbicacionEntity> depListar() {

@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/EP")
+@CrossOrigin({"*"})
 public class EpController {
     @Autowired
     private EpService epService;

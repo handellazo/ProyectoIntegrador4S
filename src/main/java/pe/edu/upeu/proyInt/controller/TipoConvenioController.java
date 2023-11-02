@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/TIPOCONVENIO")
+@CrossOrigin({"*"})
 public class TipoConvenioController {
     @Autowired
     private TipoConvenioService tipoConvenioService;

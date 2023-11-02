@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/MATRICULA")
+@CrossOrigin({"*"})
 public class MatriculaController {
     @Autowired
     private MatriculaService matriculaService;

@@ -7,8 +7,8 @@ import java.util.List;
 public interface UbicacionService {
     List<UbicacionEntity> ubicacionListar();
     UbicacionEntity buscarUbicacionPorID(int id);
-    UbicacionEntity buscarUbicacionPorDep(String departamento);
-    UbicacionEntity buscarUbicacionPorProv(String provincia);
+    List<UbicacionEntity> findByDepartamento(String departamento);
+    List<UbicacionEntity> findByProvincia(String provincia);
     List<UbicacionEntity> depListar();
     UbicacionEntity guardarUbicacion(UbicacionEntity ubicacionEntity);
     UbicacionEntity editarUbicacion(int id, UbicacionEntity ubicacionEntity);
