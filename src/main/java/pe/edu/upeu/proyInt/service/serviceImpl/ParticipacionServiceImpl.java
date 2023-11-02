@@ -30,10 +30,10 @@ public class ParticipacionServiceImpl implements ParticipacionService {
     @Override
     public ParticipacionEntity guardarParticipacion(ParticipacionEntity participacionEntity) {
         ParticipacionEntity nuevoParticipacion = new ParticipacionEntity();
-        nuevoParticipacion.setCiclo(participacionEntity.getCiclo());
-        nuevoParticipacion.setAño(participacionEntity.getAño());
-        nuevoParticipacion.setHoras(participacionEntity.getHoras());
-        nuevoParticipacion.setEstadoPart(participacionEntity.getEstadoPart());
+        nuevoParticipacion.setUrlinforme(participacionEntity.getUrlinforme());
+        nuevoParticipacion.setPartporcen(participacionEntity.getPartporcen());
+        nuevoParticipacion.setMatricula(participacionEntity.getMatricula());
+        nuevoParticipacion.setAsistencia(participacionEntity.getAsistencia());
         return participacionInterface.save(nuevoParticipacion);
     }
 
@@ -41,10 +41,10 @@ public class ParticipacionServiceImpl implements ParticipacionService {
     public ParticipacionEntity editarParticipacion(int id, ParticipacionEntity participacionEntity) {
         ParticipacionEntity participacionEncontrado = participacionInterface.findById(id).orElse(null);
         if (participacionEncontrado != null){
-            participacionEncontrado.setCiclo(participacionEntity.getCiclo());
-            participacionEncontrado.setAño(participacionEntity.getAño());
-            participacionEncontrado.setHoras(participacionEntity.getHoras());
-            participacionEncontrado.setEstadoPart(participacionEntity.getEstadoPart());
+            participacionEncontrado.setUrlinforme(participacionEntity.getUrlinforme());
+            participacionEncontrado.setPartporcen(participacionEntity.getPartporcen());
+            participacionEncontrado.setMatricula(participacionEntity.getMatricula());
+            participacionEncontrado.setAsistencia(participacionEntity.getAsistencia());
             return participacionInterface.save(participacionEncontrado);
         }
         return null;

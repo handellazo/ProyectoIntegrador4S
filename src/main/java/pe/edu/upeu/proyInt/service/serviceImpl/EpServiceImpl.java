@@ -22,7 +22,7 @@ public class EpServiceImpl implements EpService {
     @Override
     public EpEntity guardarEp(EpEntity epEntity) {
         EpEntity nuevoEp = new EpEntity();
-        nuevoEp.setEp(epEntity.getEp());
+        nuevoEp.setNombre(epEntity.getNombre());
         nuevoEp.setFacultad(epEntity.getFacultad());
         return epInterface.save(nuevoEp);
     }
@@ -31,7 +31,7 @@ public class EpServiceImpl implements EpService {
     public EpEntity editarEp(int id, EpEntity epEntity) {
         EpEntity epEncontrado = epInterface.findById(id).orElse(null);
         if (epEntity != null){
-            epEncontrado.setEp(epEntity.getEp());
+            epEncontrado.setNombre(epEntity.getNombre());
             epEncontrado.setFacultad(epEntity.getFacultad());
             return epInterface.save(epEntity);
         }
