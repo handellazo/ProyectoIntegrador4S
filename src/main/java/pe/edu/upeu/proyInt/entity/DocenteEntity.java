@@ -29,8 +29,4 @@ public class DocenteEntity implements Serializable {
     @JoinColumn(name = "EP_ID_EP")
     private EpEntity ep;
 
-    @ManyToOne
-    @JoinColumn(name = "ROLDOC_ID_ROLDOC")
-    private EpEntity rolDocente;
-
 }

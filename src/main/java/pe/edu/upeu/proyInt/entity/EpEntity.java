@@ -21,8 +21,8 @@ public class EpEntity implements Serializable {
     @SequenceGenerator(sequenceName = "SEQ_EP", allocationSize = 1, name = "seqEp")
     private Integer id;
 
-    @Column(name = "EP")
-    private String ep;
+    @Column(name = "NOMBRE")
+    private String nombre;
 
     @ManyToOne
     @JoinColumn(name = "FACULTAD_ID_FACULTAD")

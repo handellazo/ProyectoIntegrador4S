@@ -38,9 +38,6 @@ public class PersonaEntity implements Serializable {
     @Column(name = "TELF")
     private Integer telefono;
 
-    @Column(name = "CONTRASEÑA")
-    private String contraseña;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ROL_ID_ROL")
     private RolEntity rol;

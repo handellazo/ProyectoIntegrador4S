@@ -36,7 +36,6 @@ public class PersonaServiceImpl implements PersonaService {
         nuevoPersona.setDni(personaEntity.getDni());
         nuevoPersona.setCorreo(personaEntity.getCorreo());
         nuevoPersona.setTelefono(personaEntity.getTelefono());
-        nuevoPersona.setContraseña(personaEntity.getContraseña());
         return personaInterface.save(nuevoPersona);
     }
 
@@ -50,9 +49,6 @@ public class PersonaServiceImpl implements PersonaService {
             personaEncontrado.setDni(personaEntity.getDni());
             personaEncontrado.setCorreo(personaEntity.getCorreo());
             personaEncontrado.setTelefono(personaEntity.getTelefono());
-            personaEncontrado.setContraseña(personaEntity.getContraseña());
-            /*personaEncontrado.setRol_id_rol(personaEntity.getRol_id_rol());
-            personaEncontrado.setPersona_id_persona(personaEntity.getPersona_id_persona());*/
             return personaInterface.save(personaEncontrado);
         }
         return null;

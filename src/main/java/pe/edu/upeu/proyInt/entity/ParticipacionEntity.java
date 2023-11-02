@@ -22,22 +22,31 @@ public class ParticipacionEntity implements Serializable {
     @SequenceGenerator(sequenceName = "SEQ_PARTICIPACION", allocationSize = 1, name = "seqParticipacion")
     private Integer id;
 
-    @Column(name = "CICLO")
-    private Integer ciclo;
+    @Column(name = "URLINFORME")
+    private Integer urlinforme;
 
-    @Column(name = "AÑO")
-    private Integer año;
+    @Column(name = "PARTPORCEN")
+    private Integer partporcen;
 
-    @Column(name = "CANT_HORAS")
-    private Integer horas;
+    @ManyToOne
+    @JoinColumn(name = "MATRICULA_ID_MATRICULA")
+    private MatriculaEntity matricula;
 
-    @Column(name = "ESTADO_PART")
-    private Integer estadoPart;
+    @Column(name = "ASISTENCIA")
+    private Integer asistencia;
 
-    /*@Column(name = "PROYECTO_ID_PROYECTO")
-    private Integer proyectoIdProyecto;
+    @Column(name = "ASISTENCIAVAL")
+    private Integer asistenciaval;
 
-    @Column(name = "PERSONA_ID_PERSONA")
-    private Integer personaIdPersona;*/
+    @Column(name = "NOTA")
+    private Integer nota;
+
+    @ManyToOne
+    @JoinColumn(name = "GRUPOPY_ID_GRUPOPY")
+    private GrupoPyEntity grupopy;
+
+    @ManyToOne
+    @JoinColumn(name = "ROLPY_ID_ROLPY")
+    private RolPyEntity rolpy;
 
 }

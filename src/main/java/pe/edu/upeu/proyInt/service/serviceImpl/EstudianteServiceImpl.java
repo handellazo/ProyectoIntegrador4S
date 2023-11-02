@@ -22,6 +22,7 @@ public class EstudianteServiceImpl implements EstudianteService {
     @Override
     public EstudianteEntity guardarEstudiante(EstudianteEntity estudianteEntity) {
         EstudianteEntity nuevoEstudiante = new EstudianteEntity();
+        nuevoEstudiante.setCodigo(estudianteEntity.getCodigo());
         nuevoEstudiante.setPersona(estudianteEntity.getPersona());
         nuevoEstudiante.setEp(estudianteEntity.getEp());
         return estudianteInterface.save(nuevoEstudiante);
@@ -31,6 +32,7 @@ public class EstudianteServiceImpl implements EstudianteService {
     public EstudianteEntity editarEstudiante(int id, EstudianteEntity estudianteEntity) {
         EstudianteEntity estudianteEncontrado = estudianteInterface.findById(id).orElse(null);
         if (estudianteEntity != null){
+            estudianteEncontrado.setCodigo(estudianteEntity.getCodigo());
             estudianteEncontrado.setPersona(estudianteEntity.getPersona());
             estudianteEncontrado.setEp(estudianteEntity.getEp());
             return estudianteInterface.save(estudianteEntity);

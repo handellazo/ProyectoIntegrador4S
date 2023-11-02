@@ -36,6 +36,7 @@ public class ConvenioServiceImpl implements ConvenioService {
         nuevoConvenio.setFin(convenioEntity.getFin());
         nuevoConvenio.setReferencia(convenioEntity.getReferencia());
         nuevoConvenio.setTipo(convenioEntity.getTipo());
+        nuevoConvenio.setArchivo(convenioEntity.getArchivo());
         return convenioInterface.save(nuevoConvenio);
     }
 
@@ -48,6 +49,7 @@ public class ConvenioServiceImpl implements ConvenioService {
             convenioEncontrado.setFin(convenioEntity.getFin());
             convenioEncontrado.setReferencia(convenioEntity.getReferencia());
             convenioEncontrado.setTipo(convenioEntity.getTipo());
+            convenioEncontrado.setArchivo(convenioEntity.getArchivo());
             return convenioInterface.save(convenioEncontrado);
         }
         return null;

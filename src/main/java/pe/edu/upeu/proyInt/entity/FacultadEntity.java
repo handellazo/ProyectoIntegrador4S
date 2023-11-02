@@ -21,7 +21,7 @@ public class FacultadEntity implements Serializable {
     @SequenceGenerator(sequenceName = "SEQ_FACULTAD", allocationSize = 1, name = "seqFacultad")
     private Integer id;
 
-    @Column(name = "FACULTAD")
-    private String facultad;
+    @Column(name = "NOMBRE")
+    private String nombre;
 
 }

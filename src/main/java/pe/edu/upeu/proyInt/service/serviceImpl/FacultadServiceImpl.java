@@ -22,7 +22,7 @@ public class FacultadServiceImpl implements FacultadService {
     @Override
     public FacultadEntity guardarFacultad(FacultadEntity facultadEntity) {
         FacultadEntity nuevoFacultad = new FacultadEntity();
-        nuevoFacultad.setFacultad(facultadEntity.getFacultad());
+        nuevoFacultad.setNombre(facultadEntity.getNombre());
         return facultadInterface.save(nuevoFacultad);
     }
 
@@ -30,7 +30,7 @@ public class FacultadServiceImpl implements FacultadService {
     public FacultadEntity editarFacultad(int id, FacultadEntity facultadEntity) {
         FacultadEntity facultadEncontrado = facultadInterface.findById(id).orElse(null);
         if (facultadEntity != null){
-            facultadEntity.setFacultad(facultadEntity.getFacultad());
+            facultadEntity.setNombre(facultadEntity.getNombre());
             return facultadInterface.save(facultadEntity);
         }
         return null;

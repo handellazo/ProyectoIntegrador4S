@@ -24,7 +24,6 @@ public class DocenteServiceImpl implements DocenteService {
         DocenteEntity nuevoDocente = new DocenteEntity();
         nuevoDocente.setPersona(docenteEntity.getPersona());
         nuevoDocente.setEp(docenteEntity.getEp());
-        nuevoDocente.setRolDocente(docenteEntity.getRolDocente());
         return docenteInterface.save(nuevoDocente);
     }
 
@@ -34,7 +33,6 @@ public class DocenteServiceImpl implements DocenteService {
         if (docenteEntity != null){
             docenteEncontrado.setPersona(docenteEntity.getPersona());
             docenteEncontrado.setEp(docenteEntity.getEp());
-            docenteEncontrado.setRolDocente(docenteEntity.getRolDocente());
             return docenteInterface.save(docenteEntity);
         }
         return null;

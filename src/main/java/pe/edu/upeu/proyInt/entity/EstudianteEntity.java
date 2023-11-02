@@ -21,6 +21,9 @@ public class EstudianteEntity implements Serializable {
     @SequenceGenerator(sequenceName = "SEQ_ESTUDIANTE", allocationSize = 1, name = "seqEstudiante")
     private Integer id;
 
+    @Column(name = "CODIGO")
+    private String codigo;
+
     @ManyToOne
     @JoinColumn(name = "PERSONA_ID_PERSONA")
     private PersonaEntity persona;

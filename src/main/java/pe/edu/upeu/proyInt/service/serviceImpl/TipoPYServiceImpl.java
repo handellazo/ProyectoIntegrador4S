@@ -22,7 +22,7 @@ public class TipoPYServiceImpl implements TipoPYService {
     @Override
     public TipoPYEntity guardarTipoPy(TipoPYEntity tipoPyEntity) {
         TipoPYEntity nuevoTipoPy = new TipoPYEntity();
-        nuevoTipoPy.setTipoPy(tipoPyEntity.getTipoPy());
+        nuevoTipoPy.setNombre(tipoPyEntity.getNombre());
         return tipoPyInterface.save(nuevoTipoPy);
     }
 
@@ -30,7 +30,7 @@ public class TipoPYServiceImpl implements TipoPYService {
     public TipoPYEntity editarTipoPy(int id, TipoPYEntity tipoPyEntity) {
         TipoPYEntity tipoPyEncontrado = tipoPyInterface.findById(id).orElse(null);
         if (tipoPyEntity != null){
-            tipoPyEntity.setTipoPy(tipoPyEntity.getTipoPy());
+            tipoPyEntity.setNombre(tipoPyEntity.getNombre());
             return tipoPyInterface.save(tipoPyEntity);
         }
         return null;

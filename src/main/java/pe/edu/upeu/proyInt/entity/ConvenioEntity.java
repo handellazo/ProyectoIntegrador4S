@@ -41,4 +41,10 @@ public class ConvenioEntity implements Serializable {
     @JoinColumn(name = "UBICACION_ID_UBICACION")
     private UbicacionEntity ubicacion;
 
+    @Column(name = "URLARCHIVO")
+    private String archivo;
+
+    @Column(name = "ESTADO")
+    private String estado;
+
 }
