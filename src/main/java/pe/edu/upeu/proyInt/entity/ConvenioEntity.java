@@ -30,8 +30,8 @@ public class ConvenioEntity implements Serializable {
     @Column(name = "FECHA_FIN")
     private Date fin;
 
-    @Column(name = "ANEXO")
-    private String anexo;
+    @Column(name = "REFERENCIA")
+    private String referencia;
 
     @ManyToOne
     @JoinColumn(name = "TIPO_ID_TIPO")

@@ -34,7 +34,7 @@ public class ConvenioServiceImpl implements ConvenioService {
         nuevoConvenio.setNombre(convenioEntity.getNombre());
         nuevoConvenio.setInicio(convenioEntity.getInicio());
         nuevoConvenio.setFin(convenioEntity.getFin());
-        nuevoConvenio.setAnexo(convenioEntity.getAnexo());
+        nuevoConvenio.setReferencia(convenioEntity.getReferencia());
         nuevoConvenio.setTipo(convenioEntity.getTipo());
         return convenioInterface.save(nuevoConvenio);
     }
@@ -46,7 +46,7 @@ public class ConvenioServiceImpl implements ConvenioService {
             convenioEncontrado.setNombre(convenioEntity.getNombre());
             convenioEncontrado.setInicio(convenioEntity.getInicio());
             convenioEncontrado.setFin(convenioEntity.getFin());
-            convenioEncontrado.setAnexo(convenioEntity.getAnexo());
+            convenioEncontrado.setReferencia(convenioEntity.getReferencia());
             convenioEncontrado.setTipo(convenioEntity.getTipo());
             return convenioInterface.save(convenioEncontrado);
         }

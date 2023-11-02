@@ -21,7 +21,7 @@ public class TipoConvenioEntity implements Serializable {
     @SequenceGenerator(sequenceName = "SEQ_TIPOCONVENIO", allocationSize = 1, name = "seqTipoConvenio")
     private Integer id;
 
-    @Column(name = "TIPO")
-    private String tipo;
+    @Column(name = "NOMBRE")
+    private String nombre;
 
 }

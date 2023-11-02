@@ -23,7 +23,7 @@ public class TipoConvenioServiceImpl implements TipoConvenioService {
     @Override
     public TipoConvenioEntity guardarTipoConvenio(TipoConvenioEntity tipoConvenioEntity) {
         TipoConvenioEntity nuevoTipoConvenio = new TipoConvenioEntity();
-        nuevoTipoConvenio.setTipo(tipoConvenioEntity.getTipo());
+        nuevoTipoConvenio.setNombre(tipoConvenioEntity.getNombre());
         return tipoConvenioInterface.save(nuevoTipoConvenio);
     }
 
@@ -31,7 +31,7 @@ public class TipoConvenioServiceImpl implements TipoConvenioService {
     public TipoConvenioEntity editarTipoConvenio(int id, TipoConvenioEntity tipoConvenioEntity) {
         TipoConvenioEntity tipoConvenioEncontrado = tipoConvenioInterface.findById(id).orElse(null);
         if (tipoConvenioEntity != null){
-            tipoConvenioEntity.setTipo(tipoConvenioEntity.getTipo());
+            tipoConvenioEntity.setNombre(tipoConvenioEntity.getNombre());
             return tipoConvenioInterface.save(tipoConvenioEntity);
         }
         return null;
