@@ -33,6 +33,9 @@ public class ProyectoEntity implements Serializable {
     @Column(name = "ANEXO")
     private String anexo;
 
+    @Column(name = "CICLO")
+    private String ciclo;
+
     @Column(name = "ESTADO")
     private String estado;
 

@@ -52,6 +52,7 @@ public class ProyectoServiceImpl implements ProyectoService {
         nuevoProyecto.setInicio(proyectoDto.getInicio());
         nuevoProyecto.setFin(proyectoDto.getFin());
         nuevoProyecto.setAnexo(proyectoDto.getAnexo());
+        nuevoProyecto.setCiclo(proyectoDto.getCiclo());
         nuevoProyecto.setEstado(proyectoDto.getEstado());
         nuevoProyecto.setBeneficiarios(proyectoDto.getBeneficiarios());
         nuevoProyecto.setPresupuesto(proyectoDto.getPresupuesto());
@@ -76,6 +77,7 @@ public class ProyectoServiceImpl implements ProyectoService {
             proyectoEncontrado.setInicio(proyectoEntity.getInicio());
             proyectoEncontrado.setFin(proyectoEntity.getFin());
             proyectoEncontrado.setAnexo(proyectoEntity.getAnexo());
+            proyectoEncontrado.setCiclo(proyectoEncontrado.getCiclo());
             proyectoEncontrado.setEstado(proyectoEntity.getEstado());
             proyectoEncontrado.setBeneficiarios(proyectoEntity.getBeneficiarios());
             proyectoEncontrado.setPresupuesto(proyectoEntity.getPresupuesto());

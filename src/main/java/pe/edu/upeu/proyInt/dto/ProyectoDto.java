@@ -20,6 +20,8 @@ public class ProyectoDto {
 
     private String anexo;
 
+    private String ciclo;
+
     private String estado;
 
     private Integer beneficiarios;
