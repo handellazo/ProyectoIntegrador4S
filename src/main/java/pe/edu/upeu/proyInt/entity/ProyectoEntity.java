@@ -68,5 +68,8 @@ public class ProyectoEntity implements Serializable {
     @JoinColumn(name = "SEMESTRE_ID_SEMESTRE")
     private SemestreEntity semestre;
 
+    @ManyToOne
+    @JoinColumn(name = "CURSOSEMESTRE_ID_CURSOSEMESTRE")
+    private CursoSemestreEntity cursoSemestre;
 
 }

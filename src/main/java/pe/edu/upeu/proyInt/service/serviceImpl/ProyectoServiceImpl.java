@@ -23,6 +23,8 @@ public class ProyectoServiceImpl implements ProyectoService {
     private TipoPYInterface tipoPyInterface;
     @Autowired
     private EpInterface epInterface;
+    @Autowired
+    private CursoSemestreInterface cursoSemestreInterface;
 
     @Override
     public List<ProyectoEntity> proyectoListar() {
@@ -43,6 +45,7 @@ public class ProyectoServiceImpl implements ProyectoService {
         UbicacionEntity ubicacionEncontrado = ubicacionInterface.findById(Integer.valueOf(proyectoDto.getUbicacion())).orElse(null);
         EpEntity epEncontrado = epInterface.findById(Integer.valueOf(proyectoDto.getEp())).orElse(null);
         TipoPYEntity tipoPyEncontrado = tipoPyInterface.findById(Integer.valueOf(proyectoDto.getTipoPY())).orElse(null);
+        CursoSemestreEntity cursoSemestreEncontrado = cursoSemestreInterface.findById(Integer.valueOf(proyectoDto.getCursoSemestre())).orElse(null);
 
         ProyectoEntity nuevoProyecto = new ProyectoEntity();
         nuevoProyecto.setNombre(proyectoDto.getNombre());
@@ -59,6 +62,7 @@ public class ProyectoServiceImpl implements ProyectoService {
         nuevoProyecto.setUbicacion(ubicacionEncontrado);
         nuevoProyecto.setEp(epEncontrado);
         nuevoProyecto.setTipoPY(tipoPyEncontrado);
+        nuevoProyecto.setCursoSemestre(cursoSemestreEncontrado);
 
         return proyectoInterface.save(nuevoProyecto);
 
@@ -82,6 +86,7 @@ public class ProyectoServiceImpl implements ProyectoService {
             proyectoEncontrado.setEp(proyectoEntity.getEp());
             proyectoEncontrado.setTipoPY(proyectoEntity.getTipoPY());
             proyectoEncontrado.setSemestre(proyectoEntity.getSemestre());
+            proyectoEncontrado.setCursoSemestre(proyectoEntity.getCursoSemestre());
             return proyectoInterface.save(proyectoEncontrado);
         }
         return null;
