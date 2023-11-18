@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.proyInt.dto.RolDto;
 import pe.edu.upeu.proyInt.entity.RolEntity;
 import pe.edu.upeu.proyInt.service.RolService;
 
@@ -22,8 +23,14 @@ public class RolController {
         return new ResponseEntity<>(roles, HttpStatus.OK);
     };
 
+    @GetMapping("/buscarRolPorId/{id}") //GET
+    public ResponseEntity<RolEntity> buscarRolPorId(@PathVariable Integer id){
+        RolEntity rol = rolService.buscarRolPorId(id);
+        return new ResponseEntity<>(rol, HttpStatus.OK);
+    }
+
     @PostMapping("/addRol") //POST
-    public ResponseEntity<RolEntity> crearRol(@RequestBody RolEntity rol) {
+    public ResponseEntity<RolEntity> crearRol(@RequestBody RolDto rol) {
         RolEntity newRol = rolService.guardarRol(rol);
         if (newRol != null) {
             return new ResponseEntity<>(newRol, HttpStatus.CREATED);
@@ -33,7 +40,7 @@ public class RolController {
     }
 
     @PutMapping("/updateRol/{id}") //PUT
-    public ResponseEntity<RolEntity> updateRol(@PathVariable Integer id, @RequestBody RolEntity newRol) {
+    public ResponseEntity<RolEntity> updateRol(@PathVariable Integer id, @RequestBody RolDto newRol) {
         RolEntity updateRol = rolService.editarRol(id,newRol);
         if (updateRol != null) {
             return new ResponseEntity<>(updateRol, HttpStatus.OK);

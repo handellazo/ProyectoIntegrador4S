@@ -25,6 +25,8 @@ public class ProyectoServiceImpl implements ProyectoService {
     private EpInterface epInterface;
     @Autowired
     private CursoSemestreInterface cursoSemestreInterface;
+    @Autowired
+    private SemestreInterface semestreInterface;
 
     @Override
     public List<ProyectoEntity> proyectoListar() {
@@ -32,7 +34,7 @@ public class ProyectoServiceImpl implements ProyectoService {
     }
 
     @Override
-    public ProyectoEntity buscarProyectoPorID(int id) {
+    public ProyectoEntity buscarProyectoPorId(int id) {
         return proyectoInterface.findById(id)
                 .orElseThrow(
                         () -> new EntityNotFoundException("No se encuentra datos con el ID: " + id)
@@ -46,6 +48,8 @@ public class ProyectoServiceImpl implements ProyectoService {
         EpEntity epEncontrado = epInterface.findById(Integer.valueOf(proyectoDto.getEp())).orElse(null);
         TipoPYEntity tipoPyEncontrado = tipoPyInterface.findById(Integer.valueOf(proyectoDto.getTipoPY())).orElse(null);
         CursoSemestreEntity cursoSemestreEncontrado = cursoSemestreInterface.findById(Integer.valueOf(proyectoDto.getCursoSemestre())).orElse(null);
+        SemestreEntity semestreEncontrado = semestreInterface.findById(Integer.valueOf(proyectoDto.getSemestre())).orElse(null);
+
 
         ProyectoEntity nuevoProyecto = new ProyectoEntity();
         nuevoProyecto.setNombre(proyectoDto.getNombre());
@@ -63,6 +67,7 @@ public class ProyectoServiceImpl implements ProyectoService {
         nuevoProyecto.setUbicacion(ubicacionEncontrado);
         nuevoProyecto.setEp(epEncontrado);
         nuevoProyecto.setTipoPY(tipoPyEncontrado);
+        nuevoProyecto.setSemestre(semestreEncontrado);
         nuevoProyecto.setCursoSemestre(cursoSemestreEncontrado);
 
         return proyectoInterface.save(nuevoProyecto);
@@ -70,32 +75,40 @@ public class ProyectoServiceImpl implements ProyectoService {
     }
 
     @Override
-    public ProyectoEntity editarProyecto(int id, ProyectoEntity proyectoEntity) {
+    public ProyectoEntity editarProyecto(int id, ProyectoDto proyectoDto) {
         ProyectoEntity proyectoEncontrado = proyectoInterface.findById(id).orElse(null);
+        ConvenioEntity convenioEncontrado = convenioInterface.findById(proyectoDto.getId()).orElse(null);
+        UbicacionEntity ubicacionEncontrado = ubicacionInterface.findById(proyectoDto.getId()).orElse(null);
+        EpEntity epEncontrado = epInterface.findById(proyectoDto.getId()).orElse(null);
+        TipoPYEntity tipoPyEncontrado = tipoPyInterface.findById(proyectoDto.getId()).orElse(null);
+        SemestreEntity semestreEncontrado = semestreInterface.findById(proyectoDto.getId()).orElse(null);
+        CursoSemestreEntity cursoSemestreEncontrado = cursoSemestreInterface.findById(proyectoDto.getId()).orElse(null);
+
+
         if (proyectoEncontrado != null) {
-            proyectoEncontrado.setNombre(proyectoEntity.getNombre());
-            proyectoEncontrado.setInicio(proyectoEntity.getInicio());
-            proyectoEncontrado.setFin(proyectoEntity.getFin());
-            proyectoEncontrado.setAnexo(proyectoEntity.getAnexo());
+            proyectoEncontrado.setNombre(proyectoDto.getNombre());
+            proyectoEncontrado.setInicio(proyectoDto.getInicio());
+            proyectoEncontrado.setFin(proyectoDto.getFin());
+            proyectoEncontrado.setAnexo(proyectoDto.getAnexo());
             proyectoEncontrado.setCiclo(proyectoEncontrado.getCiclo());
-            proyectoEncontrado.setEstado(proyectoEntity.getEstado());
-            proyectoEncontrado.setBeneficiarios(proyectoEntity.getBeneficiarios());
-            proyectoEncontrado.setPresupuesto(proyectoEntity.getPresupuesto());
-            proyectoEncontrado.setRepresentante(proyectoEntity.getRepresentante());
-            proyectoEncontrado.setUrl_doc(proyectoEntity.getUrl_doc());
-            proyectoEncontrado.setConvenio(proyectoEntity.getConvenio());
-            proyectoEncontrado.setUbicacion(proyectoEntity.getUbicacion());
-            proyectoEncontrado.setEp(proyectoEntity.getEp());
-            proyectoEncontrado.setTipoPY(proyectoEntity.getTipoPY());
-            proyectoEncontrado.setSemestre(proyectoEntity.getSemestre());
-            proyectoEncontrado.setCursoSemestre(proyectoEntity.getCursoSemestre());
+            proyectoEncontrado.setEstado(proyectoDto.getEstado());
+            proyectoEncontrado.setBeneficiarios(proyectoDto.getBeneficiarios());
+            proyectoEncontrado.setPresupuesto(proyectoDto.getPresupuesto());
+            proyectoEncontrado.setRepresentante(proyectoDto.getRepresentante());
+            proyectoEncontrado.setUrl_doc(proyectoDto.getUrl_doc());
+            proyectoEncontrado.setConvenio(convenioEncontrado); //FK
+            proyectoEncontrado.setUbicacion(ubicacionEncontrado); //FK
+            proyectoEncontrado.setEp(epEncontrado); //FK
+            proyectoEncontrado.setTipoPY(tipoPyEncontrado); //FK
+            proyectoEncontrado.setSemestre(semestreEncontrado); //FK
+            proyectoEncontrado.setCursoSemestre(cursoSemestreEncontrado); //FK
             return proyectoInterface.save(proyectoEncontrado);
         }
         return null;
     }
 
     @Override
-    public void elimirUsuario(int id) {
+    public void eliminarProyecto(int id) {
         proyectoInterface.deleteById(id);
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.proyInt.dto.SesionDto;
 import pe.edu.upeu.proyInt.entity.SesionEntity;
 import pe.edu.upeu.proyInt.service.SesionService;
 
@@ -22,8 +23,14 @@ public class SesionController {
         return new ResponseEntity<>(sesions, HttpStatus.OK);
     };
 
+    @GetMapping("/buscarSesionPorId/{id}") //GET
+    public ResponseEntity<SesionEntity> buscarSesionporId(@PathVariable Integer id){
+        SesionEntity sesion = sesionService.buscarSesionPorId(id);
+        return new ResponseEntity<>(sesion, HttpStatus.OK);
+    }
+
     @PostMapping("/addSesion") //POST
-    public ResponseEntity<SesionEntity> crearSesion(@RequestBody SesionEntity sesion) {
+    public ResponseEntity<SesionEntity> crearSesion(@RequestBody SesionDto sesion) {
         SesionEntity newSesion = sesionService.guardarSesion(sesion);
         if (newSesion != null) {
             return new ResponseEntity<>(newSesion, HttpStatus.CREATED);
@@ -33,7 +40,7 @@ public class SesionController {
     }
 
     @PutMapping("/updateSesion/{id}") //PUT
-    public ResponseEntity<SesionEntity> updateSesion(@PathVariable Integer id, @RequestBody SesionEntity newSesion) {
+    public ResponseEntity<SesionEntity> updateSesion(@PathVariable Integer id, @RequestBody SesionDto newSesion) {
         SesionEntity updateSesion = sesionService.editarSesion(id,newSesion);
         if (updateSesion != null) {
             return new ResponseEntity<>(updateSesion, HttpStatus.OK);

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.proyInt.dto.CursoDto;
 import pe.edu.upeu.proyInt.entity.CursoEntity;
 import pe.edu.upeu.proyInt.service.CursoService;
 
@@ -22,8 +23,14 @@ public class CursoController {
         return new ResponseEntity<>(cursos, HttpStatus.OK);
     };
 
+    @GetMapping("/buscarCursoPorId/{id}") //GET
+    public ResponseEntity<CursoEntity> buscarCursoPorId(@PathVariable Integer id){
+        CursoEntity curso = cursoService.buscarCursoPorId(id);
+        return new ResponseEntity<>(curso, HttpStatus.OK);
+    }
+
     @PostMapping("/addCurso") //POST
-    public ResponseEntity<CursoEntity> crearCurso(@RequestBody CursoEntity curso) {
+    public ResponseEntity<CursoEntity> crearCurso(@RequestBody CursoDto curso) {
         CursoEntity newCurso = cursoService.guardarCurso(curso);
         if (newCurso != null) {
             return new ResponseEntity<>(newCurso, HttpStatus.CREATED);
@@ -33,7 +40,7 @@ public class CursoController {
     }
 
     @PutMapping("/updateCurso/{id}") //PUT
-    public ResponseEntity<CursoEntity> updateCurso(@PathVariable Integer id, @RequestBody CursoEntity newCurso) {
+    public ResponseEntity<CursoEntity> updateCurso(@PathVariable Integer id, @RequestBody CursoDto newCurso) {
         CursoEntity updateCurso = cursoService.editarCurso(id,newCurso);
         if (updateCurso != null) {
             return new ResponseEntity<>(updateCurso, HttpStatus.OK);

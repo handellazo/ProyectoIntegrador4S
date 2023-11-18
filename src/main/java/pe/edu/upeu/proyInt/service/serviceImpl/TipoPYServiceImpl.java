@@ -2,9 +2,11 @@ package pe.edu.upeu.proyInt.service.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upeu.proyInt.dto.TipoPyDto;
 import pe.edu.upeu.proyInt.entity.TipoPYEntity;
 import pe.edu.upeu.proyInt.repository.TipoPYInterface;
 import pe.edu.upeu.proyInt.service.TipoPYService;
+import pe.edu.upeu.proyInt.service.exception.EntityNotFoundException;
 
 import java.util.List;
 
@@ -20,18 +22,26 @@ public class TipoPYServiceImpl implements TipoPYService {
     }
 
     @Override
-    public TipoPYEntity guardarTipoPy(TipoPYEntity tipoPyEntity) {
+    public TipoPYEntity buscarTipoPyPorId(int id) {
+        return tipoPyInterface.findById(id)
+                .orElseThrow(
+                        () -> new EntityNotFoundException("No se encuentra datos con el ID: " + id)
+                );
+    }
+
+    @Override
+    public TipoPYEntity guardarTipoPy(TipoPyDto tipoPyDto) {
         TipoPYEntity nuevoTipoPy = new TipoPYEntity();
-        nuevoTipoPy.setNombre(tipoPyEntity.getNombre());
+        nuevoTipoPy.setNombre(tipoPyDto.getNombre());
         return tipoPyInterface.save(nuevoTipoPy);
     }
 
     @Override
-    public TipoPYEntity editarTipoPy(int id, TipoPYEntity tipoPyEntity) {
+    public TipoPYEntity editarTipoPy(int id, TipoPyDto tipoPyDto) {
         TipoPYEntity tipoPyEncontrado = tipoPyInterface.findById(id).orElse(null);
-        if (tipoPyEntity != null){
-            tipoPyEntity.setNombre(tipoPyEntity.getNombre());
-            return tipoPyInterface.save(tipoPyEntity);
+        if (tipoPyEncontrado != null){
+            tipoPyEncontrado.setNombre(tipoPyDto.getNombre());
+            return tipoPyInterface.save(tipoPyEncontrado);
         }
         return null;
     }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.proyInt.dto.TipoPyDto;
 import pe.edu.upeu.proyInt.entity.TipoPYEntity;
 import pe.edu.upeu.proyInt.service.TipoPYService;
 
@@ -22,8 +23,14 @@ public class TipoPyController {
         return new ResponseEntity<>(tipoPys, HttpStatus.OK);
     };
 
+    @GetMapping("/buscarTipoPyPorId/{id}") //GET
+    public ResponseEntity<TipoPYEntity> buscarTipoPyPorId(@PathVariable Integer id){
+        TipoPYEntity tipoPy = tipoPyService.buscarTipoPyPorId(id);
+        return new ResponseEntity<>(tipoPy, HttpStatus.OK);
+    }
+
     @PostMapping("/addTipoPy") //POST
-    public ResponseEntity<TipoPYEntity> crearTipoPy(@RequestBody TipoPYEntity tipoPy) {
+    public ResponseEntity<TipoPYEntity> crearTipoPy(@RequestBody TipoPyDto tipoPy) {
         TipoPYEntity newTipoPy = tipoPyService.guardarTipoPy(tipoPy);
         if (newTipoPy != null) {
             return new ResponseEntity<>(newTipoPy, HttpStatus.CREATED);
@@ -33,7 +40,7 @@ public class TipoPyController {
     }
 
     @PutMapping("/updateTipoPy/{id}") //PUT
-    public ResponseEntity<TipoPYEntity> updateTipoPy(@PathVariable Integer id, @RequestBody TipoPYEntity newTipoPy) {
+    public ResponseEntity<TipoPYEntity> updateTipoPy(@PathVariable Integer id, @RequestBody TipoPyDto newTipoPy) {
         TipoPYEntity updateTipoPy = tipoPyService.editarTipoPy(id,newTipoPy);
         if (updateTipoPy != null) {
             return new ResponseEntity<>(updateTipoPy, HttpStatus.OK);

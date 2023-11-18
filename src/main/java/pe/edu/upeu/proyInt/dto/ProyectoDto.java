@@ -3,7 +3,6 @@ package pe.edu.upeu.proyInt.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pe.edu.upeu.proyInt.entity.CursoSemestreEntity;
 
 import java.util.Date;
 @Data
@@ -11,6 +10,8 @@ import java.util.Date;
 @NoArgsConstructor
 
 public class ProyectoDto {
+
+    private Integer id;
 
     private String nombre;
 
@@ -32,15 +33,15 @@ public class ProyectoDto {
 
     private String representante;
 
-    private String convenio;
+    private String convenio; //FK
 
-    private String ubicacion;
+    private String ubicacion; //FK
 
-    private String ep;
+    private String ep; //FK
 
-    private String tipoPY;
+    private String tipoPY; //FK
 
-    private String semestre;
+    private String semestre; //FK
 
-    private String cursoSemestre;
+    private String cursoSemestre; //FK
 }

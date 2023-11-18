@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.proyInt.dto.GrupoPyDto;
 import pe.edu.upeu.proyInt.entity.GrupoPyEntity;
 import pe.edu.upeu.proyInt.service.GrupoPyService;
 
@@ -22,8 +23,14 @@ public class GrupoPyController {
         return new ResponseEntity<>(grupoPys, HttpStatus.OK);
     };
 
+    @GetMapping("/buscarGrupoPyPorId/{id}") //GET
+    public ResponseEntity<GrupoPyEntity> buscarGrupoPyPorId(@PathVariable Integer id){
+        GrupoPyEntity grupoPy = grupoPyService.buscarGrupoPyPorId(id);
+        return new ResponseEntity<>(grupoPy, HttpStatus.OK);
+    }
+
     @PostMapping("/addGrupoPy") //POST
-    public ResponseEntity<GrupoPyEntity> crearGrupoPy(@RequestBody GrupoPyEntity grupoPy) {
+    public ResponseEntity<GrupoPyEntity> crearGrupoPy(@RequestBody GrupoPyDto grupoPy) {
         GrupoPyEntity newGrupoPy = grupoPyService.guardarGrupoPy(grupoPy);
         if (newGrupoPy != null) {
             return new ResponseEntity<>(newGrupoPy, HttpStatus.CREATED);
@@ -33,7 +40,7 @@ public class GrupoPyController {
     }
 
     @PutMapping("/updateGrupoPy/{id}") //PUT
-    public ResponseEntity<GrupoPyEntity> updateGrupoPy(@PathVariable Integer id, @RequestBody GrupoPyEntity newGrupoPy) {
+    public ResponseEntity<GrupoPyEntity> updateGrupoPy(@PathVariable Integer id, @RequestBody GrupoPyDto newGrupoPy) {
         GrupoPyEntity updateGrupoPy = grupoPyService.editarGrupoPy(id,newGrupoPy);
         if (updateGrupoPy != null) {
             return new ResponseEntity<>(updateGrupoPy, HttpStatus.OK);

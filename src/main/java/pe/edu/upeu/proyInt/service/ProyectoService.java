@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface ProyectoService {
     List<ProyectoEntity> proyectoListar();
-    ProyectoEntity buscarProyectoPorID(int id);
+    ProyectoEntity buscarProyectoPorId(int id);
     ProyectoEntity guardarProyecto(ProyectoDto proyectoDto);
-    ProyectoEntity editarProyecto(int id,ProyectoEntity proyectoEntity);
-    void elimirUsuario(int id);
+    ProyectoEntity editarProyecto(int id,ProyectoDto proyectoDto);
+    void eliminarProyecto(int id);
 }

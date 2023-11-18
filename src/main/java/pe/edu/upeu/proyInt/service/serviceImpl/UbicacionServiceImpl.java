@@ -2,6 +2,7 @@ package pe.edu.upeu.proyInt.service.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upeu.proyInt.dto.UbicacionDto;
 import pe.edu.upeu.proyInt.entity.UbicacionEntity;
 import pe.edu.upeu.proyInt.repository.UbicacionInterface;
 import pe.edu.upeu.proyInt.service.UbicacionService;
@@ -21,7 +22,7 @@ public class UbicacionServiceImpl implements UbicacionService {
     }
 
     @Override
-    public UbicacionEntity buscarUbicacionPorID(int id) {
+    public UbicacionEntity buscarUbicacionPorId(int id) {
         return ubicacionInterface.findById(id)
                 .orElseThrow(
                         () -> new EntityNotFoundException("No se encuentra datos con el ID: " + id)
@@ -45,21 +46,21 @@ public class UbicacionServiceImpl implements UbicacionService {
     }
 
     @Override
-    public UbicacionEntity guardarUbicacion(UbicacionEntity ubicacionEntity) {
+    public UbicacionEntity guardarUbicacion(UbicacionDto ubicacionDto) {
         UbicacionEntity nuevoUbicacion = new UbicacionEntity();
-        nuevoUbicacion.setDistrito(ubicacionEntity.getDistrito());
-        nuevoUbicacion.setProvincia(ubicacionEntity.getProvincia());
-        nuevoUbicacion.setDepartamento(ubicacionEntity.getDepartamento());
+        nuevoUbicacion.setDistrito(ubicacionDto.getDistrito());
+        nuevoUbicacion.setProvincia(ubicacionDto.getProvincia());
+        nuevoUbicacion.setDepartamento(ubicacionDto.getDepartamento());
         return ubicacionInterface.save(nuevoUbicacion);
     }
 
     @Override
-    public UbicacionEntity editarUbicacion(int id, UbicacionEntity ubicacionEntity) {
+    public UbicacionEntity editarUbicacion(int id, UbicacionDto ubicacionDto) {
         UbicacionEntity ubicacionEncontrado = ubicacionInterface.findById(id).orElse(null);
         if (ubicacionEncontrado != null){
-            ubicacionEncontrado.setDistrito(ubicacionEntity.getDistrito());
-            ubicacionEncontrado.setProvincia(ubicacionEntity.getProvincia());
-            ubicacionEncontrado.setDepartamento(ubicacionEntity.getDepartamento());
+            ubicacionEncontrado.setDistrito(ubicacionDto.getDistrito());
+            ubicacionEncontrado.setProvincia(ubicacionDto.getProvincia());
+            ubicacionEncontrado.setDepartamento(ubicacionDto.getDepartamento());
             return ubicacionInterface.save(ubicacionEncontrado);
         }
         return null;

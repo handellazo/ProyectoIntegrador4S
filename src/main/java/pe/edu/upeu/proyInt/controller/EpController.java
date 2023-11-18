@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.proyInt.dto.EpDto;
 import pe.edu.upeu.proyInt.entity.EpEntity;
 import pe.edu.upeu.proyInt.service.EpService;
 
@@ -22,8 +23,14 @@ public class EpController {
         return new ResponseEntity<>(eps, HttpStatus.OK);
     };
 
+    @GetMapping("/buscarEpPorId/{id}") //GET
+    public ResponseEntity<EpEntity> buscarEpPorId(@PathVariable Integer id){
+        EpEntity ep = epService.buscarEpPorId(id);
+        return new ResponseEntity<>(ep, HttpStatus.OK);
+    }
+
     @PostMapping("/addEp") //POST
-    public ResponseEntity<EpEntity> crearEp(@RequestBody EpEntity ep) {
+    public ResponseEntity<EpEntity> crearEp(@RequestBody EpDto ep) {
         EpEntity newEp = epService.guardarEp(ep);
         if (newEp != null) {
             return new ResponseEntity<>(newEp, HttpStatus.CREATED);
@@ -33,7 +40,7 @@ public class EpController {
     }
 
     @PutMapping("/updateEp/{id}") //PUT
-    public ResponseEntity<EpEntity> updateEp(@PathVariable Integer id, @RequestBody EpEntity newEp) {
+    public ResponseEntity<EpEntity> updateEp(@PathVariable Integer id, @RequestBody EpDto newEp) {
         EpEntity updateEp = epService.editarEp(id,newEp);
         if (updateEp != null) {
             return new ResponseEntity<>(updateEp, HttpStatus.OK);

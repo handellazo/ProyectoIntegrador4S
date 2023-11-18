@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.proyInt.dto.UbicacionDto;
 import pe.edu.upeu.proyInt.entity.UbicacionEntity;
 import pe.edu.upeu.proyInt.service.UbicacionService;
 
@@ -22,8 +23,14 @@ public class UbicacionController {
         return new ResponseEntity<>(ubicaciones, HttpStatus.OK);
     };
 
+    @GetMapping("/buscarUbicacionPorId/{id}") //GET
+    public ResponseEntity<UbicacionEntity> buscarUbicacionPorId(@PathVariable Integer id){
+        UbicacionEntity ubicacion = ubicacionService.buscarUbicacionPorId(id);
+        return new ResponseEntity<>(ubicacion, HttpStatus.OK);
+    }
+
     @PostMapping("/addUbicacion") //POST
-    public ResponseEntity<UbicacionEntity> crearUbicacion(@RequestBody UbicacionEntity ubicacion) {
+    public ResponseEntity<UbicacionEntity> crearUbicacion(@RequestBody UbicacionDto ubicacion) {
         UbicacionEntity newUbicacion = ubicacionService.guardarUbicacion(ubicacion);
         if (newUbicacion != null) {
             return new ResponseEntity<>(newUbicacion, HttpStatus.CREATED);
@@ -33,7 +40,7 @@ public class UbicacionController {
     }
 
     @PutMapping("/updateUbicacion/{id}") //PUT
-    public ResponseEntity<UbicacionEntity> updateUbicacion(@PathVariable Integer id, @RequestBody UbicacionEntity newUbicacion) {
+    public ResponseEntity<UbicacionEntity> updateUbicacion(@PathVariable Integer id, @RequestBody UbicacionDto newUbicacion) {
         UbicacionEntity updateUbicacion = ubicacionService.editarUbicacion(id,newUbicacion);
         if (updateUbicacion != null) {
             return new ResponseEntity<>(updateUbicacion, HttpStatus.OK);

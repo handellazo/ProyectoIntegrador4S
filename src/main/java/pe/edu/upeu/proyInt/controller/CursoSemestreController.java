@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.proyInt.dto.CursoSemestreDto;
+import pe.edu.upeu.proyInt.entity.CursoEntity;
 import pe.edu.upeu.proyInt.entity.CursoSemestreEntity;
 import pe.edu.upeu.proyInt.service.CursoSemestreService;
 
@@ -22,8 +24,14 @@ public class CursoSemestreController {
         return new ResponseEntity<>(cursosSemestre, HttpStatus.OK);
     };
 
+    @GetMapping("/buscarCursoSemestrePorId/{id}") //GET
+    public ResponseEntity<CursoSemestreEntity> buscarCursoSemestrePorId(@PathVariable Integer id){
+        CursoSemestreEntity cursoSemestre = cursoSemestreService.buscarCursoSemestrePorId(id);
+        return new ResponseEntity<>(cursoSemestre, HttpStatus.OK);
+    }
+
     @PostMapping("/addCursoSemestre") //POST
-    public ResponseEntity<CursoSemestreEntity> crearCursoSemestre(@RequestBody CursoSemestreEntity cursoSemestre) {
+    public ResponseEntity<CursoSemestreEntity> crearCursoSemestre(@RequestBody CursoSemestreDto cursoSemestre) {
         CursoSemestreEntity newCursoSemestre = cursoSemestreService.guardarCursoSemestre(cursoSemestre);
         if (newCursoSemestre != null) {
             return new ResponseEntity<>(newCursoSemestre, HttpStatus.CREATED);
@@ -33,7 +41,7 @@ public class CursoSemestreController {
     }
 
     @PutMapping("/updateCursoSemestre/{id}") //PUT
-    public ResponseEntity<CursoSemestreEntity> updateCursoSemestre(@PathVariable Integer id, @RequestBody CursoSemestreEntity newCursoSemestre) {
+    public ResponseEntity<CursoSemestreEntity> updateCursoSemestre(@PathVariable Integer id, @RequestBody CursoSemestreDto newCursoSemestre) {
         CursoSemestreEntity updateCursoSemestre = cursoSemestreService.editarCursoSemestre(id,newCursoSemestre);
         if (updateCursoSemestre != null) {
             return new ResponseEntity<>(updateCursoSemestre, HttpStatus.OK);

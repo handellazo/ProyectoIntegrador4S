@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.proyInt.dto.EstudianteDto;
 import pe.edu.upeu.proyInt.entity.EstudianteEntity;
 import pe.edu.upeu.proyInt.service.EstudianteService;
 
@@ -22,8 +23,14 @@ public class EstudianteController {
         return new ResponseEntity<>(estudiantes, HttpStatus.OK);
     };
 
+    @GetMapping("/buscarEstudiantePorId/{id}") //GET
+    public ResponseEntity<EstudianteEntity> buscarEstudiantePorId(@PathVariable Integer id){
+        EstudianteEntity estudiante = estudianteService.buscarEstudiantePorId(id);
+        return new ResponseEntity<>(estudiante, HttpStatus.OK);
+    }
+
     @PostMapping("/addEstudiante") //POST
-    public ResponseEntity<EstudianteEntity> crearEstudiante(@RequestBody EstudianteEntity estudiante) {
+    public ResponseEntity<EstudianteEntity> crearEstudiante(@RequestBody EstudianteDto estudiante) {
         EstudianteEntity newEstudiante = estudianteService.guardarEstudiante(estudiante);
         if (newEstudiante != null) {
             return new ResponseEntity<>(newEstudiante, HttpStatus.CREATED);
@@ -33,7 +40,7 @@ public class EstudianteController {
     }
 
     @PutMapping("/updateEstudiante/{id}") //PUT
-    public ResponseEntity<EstudianteEntity> updateEstudiante(@PathVariable Integer id, @RequestBody EstudianteEntity newEstudiante) {
+    public ResponseEntity<EstudianteEntity> updateEstudiante(@PathVariable Integer id, @RequestBody EstudianteDto newEstudiante) {
         EstudianteEntity updateEstudiante = estudianteService.editarEstudiante(id,newEstudiante);
         if (updateEstudiante != null) {
             return new ResponseEntity<>(updateEstudiante, HttpStatus.OK);

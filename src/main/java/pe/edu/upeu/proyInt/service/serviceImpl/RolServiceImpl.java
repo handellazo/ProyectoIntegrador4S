@@ -2,6 +2,7 @@ package pe.edu.upeu.proyInt.service.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upeu.proyInt.dto.RolDto;
 import pe.edu.upeu.proyInt.entity.RolEntity;
 import pe.edu.upeu.proyInt.repository.RolInterface;
 import pe.edu.upeu.proyInt.service.RolService;
@@ -21,7 +22,7 @@ public class RolServiceImpl implements RolService {
     }
 
     @Override
-    public RolEntity buscarRolPorID(int id) {
+    public RolEntity buscarRolPorId(int id) {
         return rolInterface.findById(id)
                 .orElseThrow(
                         () -> new EntityNotFoundException("No se encuentra datos con el ID: " + id)
@@ -29,19 +30,19 @@ public class RolServiceImpl implements RolService {
     }
 
     @Override
-    public RolEntity guardarRol(RolEntity rolEntity) {
+    public RolEntity guardarRol(RolDto rolDto) {
         RolEntity nuevoRol = new RolEntity();
-        nuevoRol.setRol(rolEntity.getRol());
-        nuevoRol.setDescripcion(rolEntity.getDescripcion());
+        nuevoRol.setRol(rolDto.getRol());
+        nuevoRol.setDescripcion(rolDto.getDescripcion());
         return rolInterface.save(nuevoRol);
     }
 
     @Override
-    public RolEntity editarRol(int id, RolEntity rolEntity) {
+    public RolEntity editarRol(int id, RolDto rolDto) {
         RolEntity rolEncontrado = rolInterface.findById(id).orElse(null);
         if (rolEncontrado != null){
-            rolEncontrado.setRol(rolEntity.getRol());
-            rolEncontrado.setDescripcion(rolEntity.getDescripcion());
+            rolEncontrado.setRol(rolDto.getRol());
+            rolEncontrado.setDescripcion(rolDto.getDescripcion());
             return rolInterface.save(rolEncontrado);
         }
         return null;

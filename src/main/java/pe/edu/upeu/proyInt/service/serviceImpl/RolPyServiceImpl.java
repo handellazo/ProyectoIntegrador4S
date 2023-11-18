@@ -2,7 +2,12 @@ package pe.edu.upeu.proyInt.service.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upeu.proyInt.dto.RolPyDto;
+import pe.edu.upeu.proyInt.entity.ProyectoEntity;
+import pe.edu.upeu.proyInt.entity.RolEstudianteEntity;
 import pe.edu.upeu.proyInt.entity.RolPyEntity;
+import pe.edu.upeu.proyInt.repository.ProyectoInterface;
+import pe.edu.upeu.proyInt.repository.RolEstudianteInterface;
 import pe.edu.upeu.proyInt.repository.RolPyInterface;
 import pe.edu.upeu.proyInt.service.RolPyService;
 import pe.edu.upeu.proyInt.service.exception.EntityNotFoundException;
@@ -14,6 +19,10 @@ public class RolPyServiceImpl implements RolPyService {
 
     @Autowired
     private RolPyInterface rolPyInterface;
+    @Autowired
+    private RolEstudianteInterface rolEstudianteInterface;
+    @Autowired
+    private ProyectoInterface proyectoInterface;
 
     @Override
     public List<RolPyEntity> rolPyListar() {
@@ -21,21 +30,35 @@ public class RolPyServiceImpl implements RolPyService {
     }
 
     @Override
-    public RolPyEntity guardarRolPy(RolPyEntity rolPyEntity) {
+    public RolPyEntity buscarRolPyPorId(int id) {
+        return rolPyInterface.findById(id)
+                .orElseThrow(
+                        () -> new EntityNotFoundException("No se encuentra datos con el ID: " + id)
+                );
+    }
+
+    @Override
+    public RolPyEntity guardarRolPy(RolPyDto rolPyDto) {
+        RolEstudianteEntity rolEstudianteEncontrado = rolEstudianteInterface.findById(rolPyDto.getRolEst()).orElse(null);
+        ProyectoEntity proyectoEncontrado = proyectoInterface.findById(rolPyDto.getProyecto()).orElse(null);
+
         RolPyEntity nuevoRolPy = new RolPyEntity();
-        nuevoRolPy.setHoras(rolPyEntity.getHoras());
-        nuevoRolPy.setRolEst(rolPyEntity.getRolEst());
-        nuevoRolPy.setProyecto(rolPyEntity.getProyecto());
+        nuevoRolPy.setHoras(rolPyDto.getHoras());
+        nuevoRolPy.setRolEst(rolEstudianteEncontrado);
+        nuevoRolPy.setProyecto(proyectoEncontrado);
         return rolPyInterface.save(nuevoRolPy);
     }
 
     @Override
-    public RolPyEntity editarRolPy(int id, RolPyEntity rolPyEntity) {
+    public RolPyEntity editarRolPy(int id, RolPyDto rolPyDto) {
         RolPyEntity rolPyEncontrado = rolPyInterface.findById(id).orElse(null);
+        RolEstudianteEntity rolEstudianteEncontrado = rolEstudianteInterface.findById(rolPyDto.getRolEst()).orElse(null);
+        ProyectoEntity proyectoEncontrado = proyectoInterface.findById(rolPyDto.getProyecto()).orElse(null);
+
         if (rolPyEncontrado != null){
-            rolPyEncontrado.setHoras(rolPyEntity.getHoras());
-            rolPyEncontrado.setRolEst(rolPyEntity.getRolEst());
-            rolPyEncontrado.setProyecto(rolPyEntity.getProyecto());
+            rolPyEncontrado.setHoras(rolPyDto.getHoras());
+            rolPyEncontrado.setRolEst(rolEstudianteEncontrado);
+            rolPyEncontrado.setProyecto(proyectoEncontrado);
             return rolPyInterface.save(rolPyEncontrado);
         }
         return null;

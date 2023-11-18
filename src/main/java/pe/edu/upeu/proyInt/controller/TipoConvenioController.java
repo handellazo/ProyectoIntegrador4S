@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.proyInt.dto.TipoConvenioDto;
 import pe.edu.upeu.proyInt.entity.TipoConvenioEntity;
 import pe.edu.upeu.proyInt.service.TipoConvenioService;
 
@@ -22,8 +23,14 @@ public class TipoConvenioController {
         return new ResponseEntity<>(tipoConvenios, HttpStatus.OK);
     };
 
+    @GetMapping("/buscarTipoConvenioPorId/{id}") //GET
+    public ResponseEntity<TipoConvenioEntity> buscarTipoConvenioPorId(@PathVariable Integer id){
+        TipoConvenioEntity tipoConvenio = tipoConvenioService.buscarTipoConvenioPorId(id);
+        return new ResponseEntity<>(tipoConvenio, HttpStatus.OK);
+    }
+
     @PostMapping("/addTipoConvenio") //POST
-    public ResponseEntity<TipoConvenioEntity> crearTipoConvenio(@RequestBody TipoConvenioEntity tipoConvenio) {
+    public ResponseEntity<TipoConvenioEntity> crearTipoConvenio(@RequestBody TipoConvenioDto tipoConvenio) {
         TipoConvenioEntity newTipoConvenio = tipoConvenioService.guardarTipoConvenio(tipoConvenio);
         if (newTipoConvenio != null) {
             return new ResponseEntity<>(newTipoConvenio, HttpStatus.CREATED);
@@ -33,7 +40,7 @@ public class TipoConvenioController {
     }
 
     @PutMapping("/updateTipoConvenio/{id}") //PUT
-    public ResponseEntity<TipoConvenioEntity> updateTipoConvenio(@PathVariable Integer id, @RequestBody TipoConvenioEntity newTipoConvenio) {
+    public ResponseEntity<TipoConvenioEntity> updateTipoConvenio(@PathVariable Integer id, @RequestBody TipoConvenioDto newTipoConvenio) {
         TipoConvenioEntity updateTipoConvenio = tipoConvenioService.editarTipoConvenio(id,newTipoConvenio);
         if (updateTipoConvenio != null) {
             return new ResponseEntity<>(updateTipoConvenio, HttpStatus.OK);

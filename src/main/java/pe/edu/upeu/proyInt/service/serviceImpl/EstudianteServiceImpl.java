@@ -2,9 +2,11 @@ package pe.edu.upeu.proyInt.service.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upeu.proyInt.entity.EstudianteEntity;
-import pe.edu.upeu.proyInt.repository.EstudianteInterface;
+import pe.edu.upeu.proyInt.dto.EstudianteDto;
+import pe.edu.upeu.proyInt.entity.*;
+import pe.edu.upeu.proyInt.repository.*;
 import pe.edu.upeu.proyInt.service.EstudianteService;
+import pe.edu.upeu.proyInt.service.exception.EntityNotFoundException;
 
 import java.util.List;
 
@@ -13,6 +15,10 @@ public class EstudianteServiceImpl implements EstudianteService {
 
     @Autowired
     private EstudianteInterface estudianteInterface;
+    @Autowired
+    private PersonaInterface personaInterface;
+    @Autowired
+    private EpInterface epInterface;
 
     @Override
     public List<EstudianteEntity> estudianteListar() {
@@ -20,22 +26,36 @@ public class EstudianteServiceImpl implements EstudianteService {
     }
 
     @Override
-    public EstudianteEntity guardarEstudiante(EstudianteEntity estudianteEntity) {
+    public EstudianteEntity buscarEstudiantePorId(int id) {
+        return estudianteInterface.findById(id)
+                .orElseThrow(
+                        () -> new EntityNotFoundException("No se encuentra datos con el ID: " + id)
+                );
+    }
+
+    @Override
+    public EstudianteEntity guardarEstudiante(EstudianteDto estudianteDto) {
+        PersonaEntity personaEncontrado = personaInterface.findById(estudianteDto.getPersona()).orElse(null);
+        EpEntity epEncontrado = epInterface.findById(estudianteDto.getEp()).orElse(null);
+
         EstudianteEntity nuevoEstudiante = new EstudianteEntity();
-        nuevoEstudiante.setCodigo(estudianteEntity.getCodigo());
-        nuevoEstudiante.setPersona(estudianteEntity.getPersona());
-        nuevoEstudiante.setEp(estudianteEntity.getEp());
+        nuevoEstudiante.setCodigo(estudianteDto.getCodigo());
+        nuevoEstudiante.setPersona(personaEncontrado);
+        nuevoEstudiante.setEp(epEncontrado);
         return estudianteInterface.save(nuevoEstudiante);
     }
 
     @Override
-    public EstudianteEntity editarEstudiante(int id, EstudianteEntity estudianteEntity) {
+    public EstudianteEntity editarEstudiante(int id, EstudianteDto estudianteDto) {
         EstudianteEntity estudianteEncontrado = estudianteInterface.findById(id).orElse(null);
-        if (estudianteEntity != null){
-            estudianteEncontrado.setCodigo(estudianteEntity.getCodigo());
-            estudianteEncontrado.setPersona(estudianteEntity.getPersona());
-            estudianteEncontrado.setEp(estudianteEntity.getEp());
-            return estudianteInterface.save(estudianteEntity);
+        PersonaEntity personaEncontrado = personaInterface.findById(estudianteDto.getPersona()).orElse(null);
+        EpEntity epEncontrado = epInterface.findById(estudianteDto.getEp()).orElse(null);
+
+        if (estudianteEncontrado != null){
+            estudianteEncontrado.setCodigo(estudianteDto.getCodigo());
+            estudianteEncontrado.setPersona(personaEncontrado);
+            estudianteEncontrado.setEp(epEncontrado);
+            return estudianteInterface.save(estudianteEncontrado);
         }
         return null;
     }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.proyInt.dto.ConvenioDto;
 import pe.edu.upeu.proyInt.entity.ConvenioEntity;
 import pe.edu.upeu.proyInt.service.ConvenioService;
 
@@ -23,7 +24,7 @@ public class ConvenioController {
     };
 
     @PostMapping("/addConvenio") //POST
-    public ResponseEntity<ConvenioEntity> crearConvenio(@RequestBody ConvenioEntity convenio) {
+    public ResponseEntity<ConvenioEntity> crearConvenio(@RequestBody ConvenioDto convenio) {
         ConvenioEntity newConvenio = convenioService.guardarConvenio(convenio);
         if (newConvenio != null) {
             return new ResponseEntity<>(newConvenio, HttpStatus.CREATED);
@@ -32,8 +33,14 @@ public class ConvenioController {
         }
     }
 
+    @GetMapping("/buscarConvenioPorId/{id}") //GET
+    public ResponseEntity<ConvenioEntity> buscarConvenioPorId(@PathVariable Integer id){
+        ConvenioEntity convenio = convenioService.buscarConvenioPorId(id);
+        return new ResponseEntity<>(convenio, HttpStatus.OK);
+    }
+
     @PutMapping("/updateConvenio/{id}") //PUT
-    public ResponseEntity<ConvenioEntity> updateConvenio(@PathVariable Integer id, @RequestBody ConvenioEntity newConvenio) {
+    public ResponseEntity<ConvenioEntity> updateConvenio(@PathVariable Integer id, @RequestBody ConvenioDto newConvenio) {
         ConvenioEntity updateConvenio = convenioService.editarConvenio(id,newConvenio);
         if (updateConvenio != null) {
             return new ResponseEntity<>(updateConvenio, HttpStatus.OK);

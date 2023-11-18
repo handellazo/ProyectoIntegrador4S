@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.proyInt.dto.RolEstudianteDto;
 import pe.edu.upeu.proyInt.entity.RolEstudianteEntity;
 import pe.edu.upeu.proyInt.service.RolEstudianteService;
 
@@ -22,8 +23,14 @@ public class RolEstudianteController {
         return new ResponseEntity<>(rolEstudiantes, HttpStatus.OK);
     };
 
+    @GetMapping("/buscarRolEstudiantePorId/{id}") //GET
+    public ResponseEntity<RolEstudianteEntity> buscarRolEstudiantePorId(@PathVariable Integer id){
+        RolEstudianteEntity rolEstudiante = rolEstudianteService.buscarRolEstudiantePorId(id);
+        return new ResponseEntity<>(rolEstudiante, HttpStatus.OK);
+    }
+
     @PostMapping("/addRolEstudiante") //POST
-    public ResponseEntity<RolEstudianteEntity> crearRolEstudiante(@RequestBody RolEstudianteEntity rolEstudiante) {
+    public ResponseEntity<RolEstudianteEntity> crearRolEstudiante(@RequestBody RolEstudianteDto rolEstudiante) {
         RolEstudianteEntity newRolEstudiante = rolEstudianteService.guardarRolEstudiante(rolEstudiante);
         if (newRolEstudiante != null) {
             return new ResponseEntity<>(newRolEstudiante, HttpStatus.CREATED);
@@ -33,7 +40,7 @@ public class RolEstudianteController {
     }
 
     @PutMapping("/updateRolEstudiante/{id}") //PUT
-    public ResponseEntity<RolEstudianteEntity> updateRolEstudiante(@PathVariable Integer id, @RequestBody RolEstudianteEntity newRolEstudiante) {
+    public ResponseEntity<RolEstudianteEntity> updateRolEstudiante(@PathVariable Integer id, @RequestBody RolEstudianteDto newRolEstudiante) {
         RolEstudianteEntity updateRolEstudiante = rolEstudianteService.editarRolEstudiante(id,newRolEstudiante);
         if (updateRolEstudiante != null) {
             return new ResponseEntity<>(updateRolEstudiante, HttpStatus.OK);

@@ -23,11 +23,11 @@ public class MatriculaEntity implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "ESTUDIANTE_ID_ESTUDIANTE")
-    private CursoEntity estudiante;
+    private EstudianteEntity estudiante;
 
     @ManyToOne
     @JoinColumn(name = "CURSOSEMESTRE_ID_CURSOSEMESTRE")
-    private SemestreEntity curso;
+    private CursoSemestreEntity cursoSemestre;
 
     @Column(name = "CICLO")
     private Integer ciclo;

@@ -2,9 +2,11 @@ package pe.edu.upeu.proyInt.service.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upeu.proyInt.entity.EpEntity;
-import pe.edu.upeu.proyInt.repository.EpInterface;
+import pe.edu.upeu.proyInt.dto.EpDto;
+import pe.edu.upeu.proyInt.entity.*;
+import pe.edu.upeu.proyInt.repository.*;
 import pe.edu.upeu.proyInt.service.EpService;
+import pe.edu.upeu.proyInt.service.exception.EntityNotFoundException;
 
 import java.util.List;
 
@@ -13,6 +15,8 @@ public class EpServiceImpl implements EpService {
 
     @Autowired
     private EpInterface epInterface;
+    @Autowired
+    private FacultadInterface facultadInterface;
 
     @Override
     public List<EpEntity> epListar() {
@@ -20,20 +24,33 @@ public class EpServiceImpl implements EpService {
     }
 
     @Override
-    public EpEntity guardarEp(EpEntity epEntity) {
+    public EpEntity buscarEpPorId(int id) {
+        return epInterface.findById(id)
+                .orElseThrow(
+                        () -> new EntityNotFoundException("No se encuentra datos con el ID: " + id)
+                );
+    }
+
+    @Override
+    public EpEntity guardarEp(EpDto epDto) {
+        FacultadEntity facultadEncontrado = facultadInterface.findById(epDto.getFacultad()).orElse(null);
+
         EpEntity nuevoEp = new EpEntity();
-        nuevoEp.setNombre(epEntity.getNombre());
-        nuevoEp.setFacultad(epEntity.getFacultad());
+        nuevoEp.setNombre(epDto.getNombre());
+        nuevoEp.setFacultad(facultadEncontrado);
         return epInterface.save(nuevoEp);
     }
 
     @Override
-    public EpEntity editarEp(int id, EpEntity epEntity) {
+    public EpEntity editarEp(int id, EpDto epDto) {
         EpEntity epEncontrado = epInterface.findById(id).orElse(null);
-        if (epEntity != null){
-            epEncontrado.setNombre(epEntity.getNombre());
-            epEncontrado.setFacultad(epEntity.getFacultad());
-            return epInterface.save(epEntity);
+        FacultadEntity facultadEncontrado = facultadInterface.findById(epDto.getFacultad()).orElse(null);
+
+
+        if (epEncontrado != null){
+            epEncontrado.setNombre(epDto.getNombre());
+            epEncontrado.setFacultad(facultadEncontrado);
+            return epInterface.save(epEncontrado);
         }
         return null;
     }

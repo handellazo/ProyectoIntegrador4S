@@ -2,6 +2,7 @@ package pe.edu.upeu.proyInt.service.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upeu.proyInt.dto.TipoConvenioDto;
 import pe.edu.upeu.proyInt.entity.TipoConvenioEntity;
 import pe.edu.upeu.proyInt.repository.TipoConvenioInterface;
 import pe.edu.upeu.proyInt.service.TipoConvenioService;
@@ -21,18 +22,26 @@ public class TipoConvenioServiceImpl implements TipoConvenioService {
     }
 
     @Override
-    public TipoConvenioEntity guardarTipoConvenio(TipoConvenioEntity tipoConvenioEntity) {
+    public TipoConvenioEntity buscarTipoConvenioPorId(int id) {
+        return tipoConvenioInterface.findById(id)
+                .orElseThrow(
+                        () -> new EntityNotFoundException("No se encuentra datos con el ID: " + id)
+                );
+    }
+
+    @Override
+    public TipoConvenioEntity guardarTipoConvenio(TipoConvenioDto tipoConvenioDto) {
         TipoConvenioEntity nuevoTipoConvenio = new TipoConvenioEntity();
-        nuevoTipoConvenio.setNombre(tipoConvenioEntity.getNombre());
+        nuevoTipoConvenio.setNombre(tipoConvenioDto.getNombre());
         return tipoConvenioInterface.save(nuevoTipoConvenio);
     }
 
     @Override
-    public TipoConvenioEntity editarTipoConvenio(int id, TipoConvenioEntity tipoConvenioEntity) {
+    public TipoConvenioEntity editarTipoConvenio(int id, TipoConvenioDto tipoConvenioDto) {
         TipoConvenioEntity tipoConvenioEncontrado = tipoConvenioInterface.findById(id).orElse(null);
-        if (tipoConvenioEntity != null){
-            tipoConvenioEntity.setNombre(tipoConvenioEntity.getNombre());
-            return tipoConvenioInterface.save(tipoConvenioEntity);
+        if (tipoConvenioEncontrado != null){
+            tipoConvenioEncontrado.setNombre(tipoConvenioDto.getNombre());
+            return tipoConvenioInterface.save(tipoConvenioEncontrado);
         }
         return null;
     }

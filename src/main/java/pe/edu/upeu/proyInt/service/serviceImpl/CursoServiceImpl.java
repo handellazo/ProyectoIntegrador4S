@@ -2,6 +2,7 @@ package pe.edu.upeu.proyInt.service.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upeu.proyInt.dto.CursoDto;
 import pe.edu.upeu.proyInt.entity.CursoEntity;
 import pe.edu.upeu.proyInt.repository.CursoInterface;
 import pe.edu.upeu.proyInt.service.CursoService;
@@ -21,7 +22,7 @@ public class CursoServiceImpl implements CursoService {
     }
 
     @Override
-    public CursoEntity buscarCursoPorID(int id) {
+    public CursoEntity buscarCursoPorId(int id) {
         return cursoInterface.findById(id)
                 .orElseThrow(
                         () -> new EntityNotFoundException("No se encuentra datos con el ID: " + id)
@@ -29,17 +30,17 @@ public class CursoServiceImpl implements CursoService {
     }
 
     @Override
-    public CursoEntity guardarCurso(CursoEntity cursoEntity) {
+    public CursoEntity guardarCurso(CursoDto cursoDto) {
         CursoEntity nuevoCurso = new CursoEntity();
-        nuevoCurso.setNombre(cursoEntity.getNombre());
+        nuevoCurso.setNombre(cursoDto.getNombre());
         return cursoInterface.save(nuevoCurso);
     }
 
     @Override
-    public CursoEntity editarCurso(int id, CursoEntity cursoEntity) {
+    public CursoEntity editarCurso(int id, CursoDto cursoDto) {
         CursoEntity cursoEncontrado = cursoInterface.findById(id).orElse(null);
         if (cursoEncontrado != null){
-            cursoEncontrado.setNombre(cursoEntity.getNombre());
+            cursoEncontrado.setNombre(cursoDto.getNombre());
             return cursoInterface.save(cursoEncontrado);
         }
         return null;
