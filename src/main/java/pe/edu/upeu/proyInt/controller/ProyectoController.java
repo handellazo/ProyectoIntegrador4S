@@ -13,12 +13,12 @@ import pe.edu.upeu.proyInt.service.ProyectoService;
 import java.util.List;
     @RestController
     @RequestMapping("/api/PROYECTO")
-    @CrossOrigin({"*"})
+    @CrossOrigin(origins = {"http://localhost:4200, http://localhost:8080 "})
     public class ProyectoController {
         @Autowired
         private ProyectoService proyectoService;
 
-        @GetMapping("/listarProyecto") //GET
+        @GetMapping("/listProyecto") //GET
         public ResponseEntity<List<ProyectoEntity>> listaProyectos(){
             List<ProyectoEntity> proyectos = proyectoService.proyectoListar();
             return new ResponseEntity<>(proyectos, HttpStatus.OK);
@@ -31,7 +31,7 @@ import java.util.List;
         }
 
         @PostMapping("/addProyecto") //POST @PostMapping es una anotacion para construir APIS
-        public ResponseEntity<ProyectoEntity> crearProyecto(@RequestBody ProyectoDto proyecto) {
+        public ResponseEntity<ProyectoEntity> addProyecto(@RequestBody ProyectoDto proyecto) {
             try{
             ProyectoEntity newProyecto = proyectoService.guardarProyecto(proyecto);
             if (newProyecto != null) {

@@ -37,7 +37,7 @@ public class ProyectoEntity implements Serializable {
     private String ciclo;
 
     @Column(name = "ESTADO")
-    private String estado;
+    private Integer estado;
 
     @Column(name = "CANT_BENEFICIARIOS")
     private Integer beneficiarios;

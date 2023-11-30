@@ -43,12 +43,12 @@ public class ProyectoServiceImpl implements ProyectoService {
 
     @Override
     public ProyectoEntity guardarProyecto(ProyectoDto proyectoDto) {
-        ConvenioEntity convenioEncontrado = convenioInterface.findById(Integer.valueOf(proyectoDto.getConvenio())).orElse(null);
-        UbicacionEntity ubicacionEncontrado = ubicacionInterface.findById(Integer.valueOf(proyectoDto.getUbicacion())).orElse(null);
-        EpEntity epEncontrado = epInterface.findById(Integer.valueOf(proyectoDto.getEp())).orElse(null);
-        TipoPYEntity tipoPyEncontrado = tipoPyInterface.findById(Integer.valueOf(proyectoDto.getTipoPY())).orElse(null);
-        CursoSemestreEntity cursoSemestreEncontrado = cursoSemestreInterface.findById(Integer.valueOf(proyectoDto.getCursoSemestre())).orElse(null);
-        SemestreEntity semestreEncontrado = semestreInterface.findById(Integer.valueOf(proyectoDto.getSemestre())).orElse(null);
+        ConvenioEntity convenioEncontrado = convenioInterface.findById(proyectoDto.getConvenio()).orElse(null);
+        UbicacionEntity ubicacionEncontrado = ubicacionInterface.findById(proyectoDto.getUbicacion()).orElse(null);
+        EpEntity epEncontrado = epInterface.findById(proyectoDto.getEp()).orElse(null);
+        TipoPYEntity tipoPyEncontrado = tipoPyInterface.findById(proyectoDto.getTipoPY()).orElse(null);
+        CursoSemestreEntity cursoSemestreEncontrado = cursoSemestreInterface.findById(proyectoDto.getCursoSemestre()).orElse(null);
+        SemestreEntity semestreEncontrado = semestreInterface.findById(proyectoDto.getSemestre()).orElse(null);
 
 
         ProyectoEntity nuevoProyecto = new ProyectoEntity();

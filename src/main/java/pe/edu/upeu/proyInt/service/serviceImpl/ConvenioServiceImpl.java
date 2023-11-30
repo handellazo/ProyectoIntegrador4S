@@ -46,7 +46,7 @@ public class ConvenioServiceImpl implements ConvenioService {
         nuevoConvenio.setTipo(tipoConvenioEncontrado); //FK
         nuevoConvenio.setUbicacion(ubicacionEncontrado); //FK
         nuevoConvenio.setArchivo(convenioDto.getArchivo());
-        nuevoConvenio.setEstado(convenioDto.getEstado());
+        nuevoConvenio.setEstado(Integer.valueOf(convenioDto.getEstado()));
         return convenioInterface.save(nuevoConvenio);
     }
 
@@ -65,7 +65,7 @@ public class ConvenioServiceImpl implements ConvenioService {
             convenioEncontrado.setTipo(tipoConvenioEncontrado);
             convenioEncontrado.setUbicacion(ubicacionEncontrado);
             convenioEncontrado.setArchivo(convenioDto.getArchivo());
-            convenioEncontrado.setEstado(convenioDto.getEstado());
+            convenioEncontrado.setEstado(Integer.valueOf(convenioDto.getEstado()));
             return convenioInterface.save(convenioEncontrado);
         }
         return null;

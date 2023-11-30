@@ -16,7 +16,7 @@ public class SemestreEntity implements Serializable {
     private static final long serialVersionUID = -2170897015344177815L;
 
     @Id
-    @Column(name = "ID_TIPOPY")
+    @Column(name = "ID_SEMESTRE")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqSemestre")
     @SequenceGenerator(sequenceName = "SEQ_SEMESTRE", allocationSize = 1, name = "seqSemestre")
     private Integer id;

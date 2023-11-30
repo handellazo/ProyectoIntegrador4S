@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/TIPOCONVENIO")
-@CrossOrigin({"*"})
+@CrossOrigin(origins = {"http://localhost:4200, http://localhost:9090 "})
 public class TipoConvenioController {
     @Autowired
     private TipoConvenioService tipoConvenioService;

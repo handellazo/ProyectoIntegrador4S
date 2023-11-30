@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/PARTICIPACION")
-@CrossOrigin({"*"})
+@CrossOrigin(origins = {"http://localhost:4200, http://localhost:8080 "})
 public class ParticipacionController {
     @Autowired
     private ParticipacionService participacionService;

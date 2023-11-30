@@ -45,6 +45,6 @@ public class ConvenioEntity implements Serializable {
     private String archivo;
 
     @Column(name = "ESTADO")
-    private String estado;
+    private Integer estado;
 
 }

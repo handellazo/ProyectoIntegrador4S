@@ -23,7 +23,7 @@ public class ProyectoDto {
 
     private String ciclo;
 
-    private String estado;
+    private Integer estado;
 
     private Integer beneficiarios;
 
@@ -33,15 +33,15 @@ public class ProyectoDto {
 
     private String representante;
 
-    private String convenio; //FK
+    private Integer convenio; //FK
 
-    private String ubicacion; //FK
+    private Integer ubicacion; //FK
 
-    private String ep; //FK
+    private Integer ep; //FK
 
-    private String tipoPY; //FK
+    private Integer tipoPY; //FK
 
-    private String semestre; //FK
+    private Integer semestre; //FK
 
-    private String cursoSemestre; //FK
+    private Integer cursoSemestre; //FK
 }

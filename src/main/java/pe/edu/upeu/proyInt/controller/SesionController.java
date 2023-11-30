@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/SESION")
-@CrossOrigin({"*"})
+@CrossOrigin(origins = {"http://localhost:4200, http://localhost:8080 "})
 public class SesionController {
     @Autowired
     private SesionService sesionService;
